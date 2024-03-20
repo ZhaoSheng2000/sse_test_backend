@@ -1,7 +1,7 @@
 import { Controller, Get, Sse } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Observable } from 'rxjs';
-const { exec } = require("child_process");
+const { exec } = require('child_process');
 
 @Controller()
 export class AppController {
@@ -17,11 +17,9 @@ export class AppController {
     const childProcess = exec('tail -f ./log');
 
     return new Observable((observer) => {
-
       childProcess.stdout.on('data', (msg) => {
-        observer.next({ data: { msg: msg.toString() }});
-      })
-      
+        observer.next({ data: { msg: msg.toString() } });
+      });
     });
   }
 }
